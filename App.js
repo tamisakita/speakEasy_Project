@@ -1,4 +1,5 @@
 import * as React from "react";
+import { StyleSheet, View, ActivityIndicator } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { NavigationContainer } from "@react-navigation/native";
@@ -42,18 +43,30 @@ export default function App() {
 
   return (
     <SafeAreaProvider>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{
-              header: () => <CustomHeader />,
-            }}
-          />
-        </Stack.Navigator>
-        {/* <Tab.Navigator></Tab.Navigator> */}
-      </NavigationContainer>
+      <ThemeProvider theme={seTheme}>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              options={{
+                header: () => <CustomHeader />,
+              }}
+            />
+          </Stack.Navigator>
+          {/* <Tab.Navigator></Tab.Navigator> */}
+        </NavigationContainer>
+      </ThemeProvider>
     </SafeAreaProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    padding: 10,
+  },
+});
