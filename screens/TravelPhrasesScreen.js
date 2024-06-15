@@ -8,7 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import CustomButtonTravePhrases from "../components/CustomButtonTravelPhrases";
 
-export default function travelPhrasesScreen() {
+export default function TravelPhrasesScreen() {
   return (
     <View style={styles.container}>
       <Text h2>Travel Phrases</Text>
@@ -20,9 +20,21 @@ export default function travelPhrasesScreen() {
         icon={faPlane}
         route={"AirportPhrases"}
       />
-      <CustomButtonTravePhrases title={"Restaurant"} icon={faBurger} />
-      <CustomButtonTravePhrases title={"Transport"} icon={faBus} />
-      <CustomButtonTravePhrases title={"Groceries"} icon={faBasketShopping} />
+      <CustomButtonTravePhrases
+        title={"Restaurant"}
+        icon={faBurger}
+        route={"RestaurantPhrases"}
+      />
+      <CustomButtonTravePhrases
+        title={"Transport"}
+        icon={faBus}
+        route={"TransportPhrases"}
+      />
+      <CustomButtonTravePhrases
+        title={"Groceries"}
+        icon={faBasketShopping}
+        route={"GroceriesPhrases"}
+      />
     </View>
   );
 }

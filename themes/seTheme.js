@@ -36,6 +36,10 @@ export const seTheme = createTheme({
         fontFamily: "Poppins_400Regular",
         fontSize: 24,
       },
+      style: {
+        fontFamily: "Poppins_400Regular",
+        fontSize: 20,
+      },
     },
     Button: {
       buttonStyle: {
