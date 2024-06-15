@@ -1,4 +1,3 @@
-import { Platform } from "react-native";
 import { createTheme } from "@rneui/themed";
 
 const themePalette = {
@@ -23,7 +22,7 @@ export const seTheme = createTheme({
         color: themePalette.primary,
         fontWeight: "bold",
         fontFamily: "Poppins_700Bold",
-        fontSize: 40,
+        fontSize: 35,
       },
       h3Style: {
         color: themePalette.white,
@@ -33,15 +32,19 @@ export const seTheme = createTheme({
       },
       h4Style: {
         color: themePalette.primary,
-        fontWeight: "light",
-        fontFamily: "Poppins_300Light",
-        fontSize: 22,
+        fontWeight: "regular",
+        fontFamily: "Poppins_400Regular",
+        fontSize: 24,
+      },
+      style: {
+        fontFamily: "Poppins_400Regular",
+        fontSize: 20,
       },
     },
     Button: {
       buttonStyle: {
         borderRadius: 10,
-        padding: 20,
+        padding: 10,
         backgroundColor: themePalette.primary,
       },
       titleStyle: {
