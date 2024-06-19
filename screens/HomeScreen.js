@@ -64,13 +64,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     gap: 20,
-    paddingVertical: 20,
+    paddingBottom: 20,
   },
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
     gap: 20,
-    marginHorizontal: 10,
+    // marginHorizontal: 10,
   },
   buttonImage: {
     width: 120,
