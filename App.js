@@ -2,13 +2,15 @@ import * as React from "react";
 import { StyleSheet, View, ActivityIndicator } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
+// Imported components for navigation
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
+// Imported custom theme
 import { ThemeProvider } from "@rneui/themed";
 import { seTheme } from "./themes/seTheme";
 
+// Imported fonts
 import { useFonts } from "expo-font";
 import { JosefinSans_700Bold } from "@expo-google-fonts/josefin-sans";
 import {
@@ -17,6 +19,7 @@ import {
   Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
 
+// Imported components for each screen
 import HomeScreen from "./screens/HomeScreen";
 import CustomHeader from "./components/CustomHeader";
 import TravelPhrasesScreen from "./screens/TravelPhrasesScreen";
@@ -25,10 +28,11 @@ import RestaurantPhrasesScreen from "./screens/RestaurantPhrasesScreen";
 import TransportPhrasesScreen from "./screens/TransportPhrasesScreen";
 import GroceriesPhrasesScreen from "./screens/GroceriesPhrasesScreen";
 
+// Create a navigation stack
 const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
 
 export default function App() {
+  // Load fonts asynchronously
   let [fontsLoaded] = useFonts({
     JosefinSans_700Bold,
     Poppins_400Regular,
@@ -36,6 +40,7 @@ export default function App() {
     Poppins_700Bold,
   });
 
+  // Render a loading indicator until fonts are loaded
   if (!fontsLoaded) {
     return (
       <View style={styles.loadingContainer}>
@@ -46,53 +51,32 @@ export default function App() {
 
   return (
     <SafeAreaProvider>
+      {/* ThemeProvider to apply a custom theme (seTheme) throughout the app */}
       <ThemeProvider theme={seTheme}>
         <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen
-              name="Home"
-              component={HomeScreen}
-              options={{
-                header: () => <CustomHeader />,
-              }}
-            />
+          {/* Stack.Navigator manages the navigation stack with screens */}
+          {/* Since all screens have the same header, I set the header on the screenOptions */}
+          <Stack.Navigator screenOptions={{ header: () => <CustomHeader /> }}>
+            {/* Stack.Screen contains two props: name (name of the route) and component (the component of the route) */}
+            <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen
               name="TravelPhrases"
               component={TravelPhrasesScreen}
-              options={{
-                header: () => <CustomHeader />,
-              }}
             />
-            <Stack.Screen
-              name="AirportPhrases"
-              component={AirportPhrases}
-              options={{
-                header: () => <CustomHeader />,
-              }}
-            />
+            <Stack.Screen name="AirportPhrases" component={AirportPhrases} />
             <Stack.Screen
               name="RestaurantPhrases"
               component={RestaurantPhrasesScreen}
-              options={{
-                header: () => <CustomHeader />,
-              }}
             />
             <Stack.Screen
               name="TransportPhrases"
               component={TransportPhrasesScreen}
-              options={{
-                header: () => <CustomHeader />,
-              }}
             />
             <Stack.Screen
               name="GroceriesPhrases"
               component={GroceriesPhrasesScreen}
-              options={{
-                header: () => <CustomHeader />,
-              }}
             />
           </Stack.Navigator>
-          {/* <Tab.Navigator></Tab.Navigator> */}
         </NavigationContainer>
       </ThemeProvider>
     </SafeAreaProvider>

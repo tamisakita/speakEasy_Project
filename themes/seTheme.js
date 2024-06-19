@@ -14,19 +14,19 @@ export const seTheme = createTheme({
     Text: {
       h1Style: {
         color: themePalette.primary,
-        fontWeight: "bold",
+        fontWeight: "regular",
         fontFamily: "Poppins_700Bold",
         fontSize: 50,
       },
       h2Style: {
         color: themePalette.primary,
-        fontWeight: "bold",
+        fontWeight: "regular",
         fontFamily: "Poppins_700Bold",
         fontSize: 35,
       },
       h3Style: {
         color: themePalette.white,
-        fontWeight: "semibold",
+        fontWeight: "regular",
         fontFamily: "Poppins_600SemiBold",
         fontSize: 30,
       },
@@ -34,7 +34,7 @@ export const seTheme = createTheme({
         color: themePalette.primary,
         fontWeight: "regular",
         fontFamily: "Poppins_400Regular",
-        fontSize: 24,
+        fontSize: 20,
       },
       style: {
         fontFamily: "Poppins_400Regular",

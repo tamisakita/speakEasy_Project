@@ -4,18 +4,24 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import { useRoute, useNavigation } from "@react-navigation/native";
 
+// Custom header component for the application
 const CustomHeader = () => {
+  // Hook to access the navigation object
   const navigation = useNavigation();
+  // Hook to access the current route
   const route = useRoute();
 
+  // Function to handle back navigation
   const handleGoBack = () => {
     navigation.goBack();
   };
 
+  // Verification to know if Im in Home page so I dont need to show the go back button
   const shouldShowBackButton = route.name !== "Home";
 
   return (
     <Header
+      // Logo
       backgroundColor="white"
       barStyle="default"
       centerComponent={{
@@ -30,6 +36,7 @@ const CustomHeader = () => {
       containerStyle={{
         width: "100%",
       }}
+      // Go back button
       leftComponent={
         shouldShowBackButton && {
           icon: "arrow-left",
@@ -38,6 +45,7 @@ const CustomHeader = () => {
           onPress: handleGoBack,
         }
       }
+      // Profile Button
       rightComponent={
         <FontAwesomeIcon icon={faCircleUser} size={45} color="black" />
       }

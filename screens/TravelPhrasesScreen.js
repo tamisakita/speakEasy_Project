@@ -1,11 +1,8 @@
 import { StyleSheet, View } from "react-native";
 import { Text } from "@rneui/themed";
-import {
-  faPlane,
-  faBurger,
-  faBus,
-  faBasketShopping,
-} from "@fortawesome/free-solid-svg-icons";
+
+import { getTravelPhrasesButtonsData } from "../data/travel-phrases-buttons-data";
+
 import CustomButtonTravePhrases from "../components/CustomButtonTravelPhrases";
 
 export default function TravelPhrasesScreen() {
@@ -15,30 +12,21 @@ export default function TravelPhrasesScreen() {
       <Text h4 style={styles.header4}>
         Essential Phrases at Your Fingertips
       </Text>
-      <CustomButtonTravePhrases
-        title={"Airport"}
-        icon={faPlane}
-        route={"AirportPhrases"}
-      />
-      <CustomButtonTravePhrases
-        title={"Restaurant"}
-        icon={faBurger}
-        route={"RestaurantPhrases"}
-      />
-      <CustomButtonTravePhrases
-        title={"Transport"}
-        icon={faBus}
-        route={"TransportPhrases"}
-      />
-      <CustomButtonTravePhrases
-        title={"Groceries"}
-        icon={faBasketShopping}
-        route={"GroceriesPhrases"}
-      />
+
+      {/* Dynamically generate buttons for each travel phrase category */}
+      {getTravelPhrasesButtonsData().map((button) => (
+        <CustomButtonTravePhrases
+          key={button.title}
+          title={button.title}
+          icon={button.icon}
+          route={button.route}
+        />
+      ))}
     </View>
   );
 }
 
+// custom styles for the TravelPhrasesScreen component
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -49,6 +37,6 @@ const styles = StyleSheet.create({
   },
   header4: {
     textAlign: "center",
-    fontSize: 16,
+    paddingBottom: 10,
   },
 });
