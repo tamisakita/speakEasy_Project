@@ -3,7 +3,9 @@ import { Button } from "@rneui/themed";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { useNavigation } from "@react-navigation/native";
 
+// Created the CustomButtonTravePhrases to dynamically generate the button and used the props title, icon and route
 export default function CustomButtonTravePhrases({ title, icon, route }) {
+  // Use navigation hook to handle navigation
   const navigation = useNavigation();
   return (
     <Button
@@ -13,11 +15,13 @@ export default function CustomButtonTravePhrases({ title, icon, route }) {
       titleStyle={styles.title}
       icon={<FontAwesomeIcon icon={icon} size={50} color="white" />}
       iconRight={true}
+      // Handle button press to navigate to the specified route
       onPress={() => navigation.navigate(route)}
     />
   );
 }
 
+// Custom style for the Button component
 const styles = StyleSheet.create({
   buttonContainer: {
     width: "100%",

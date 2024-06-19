@@ -11,6 +11,7 @@ const buttonWidth = width / 2 - 30;
 
 export default function CustomButtonHome({ title, icon }) {
   return (
+    // for this custom button I've used the Button component from @rneui/themed with its respective props
     <Button
       buttonStyle={styles.customButtonContainer}
       title={title}
@@ -20,6 +21,7 @@ export default function CustomButtonHome({ title, icon }) {
   );
 }
 
+// Custom style for the Button component
 const styles = StyleSheet.create({
   customButtonContainer: {
     width: buttonWidth,

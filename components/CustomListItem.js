@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View } from "react-native";
 import { ListItem } from "@rneui/base";
 
+// CustomListItem component to display phrases translared
+// passed the prop itemData wich contains the array with data
 export default function CustomListItem({ itemData }) {
   return (
     <View style={styles.container}>
@@ -14,6 +16,7 @@ export default function CustomListItem({ itemData }) {
   );
 }
 
+// Styles for the CustomListItem component
 const styles = StyleSheet.create({
   container: {
     marginVertical: 20,

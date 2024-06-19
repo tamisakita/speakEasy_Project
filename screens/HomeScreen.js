@@ -1,6 +1,9 @@
 import { StyleSheet, View, Image } from "react-native";
+
+// Imported custom theme
 import { Text, Button } from "@rneui/themed";
 
+// Imported icons from fontawesome
 import {
   faComments,
   faCameraRetro,
@@ -8,8 +11,10 @@ import {
   faMicrophoneLines,
 } from "@fortawesome/free-solid-svg-icons";
 
+// Imported CustomButtonHome to be used on the home screen
 import CustomButtonHome from "../components/CustomButtonHome";
 
+// added prop navigation to navigate through screens
 export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
@@ -19,6 +24,9 @@ export default function HomeScreen({ navigation }) {
       <Text h1 style={styles.leftAlignText}>
         Camila
       </Text>
+
+      {/* Container with cutomized buttons to navigate to Live Chat, Text, Camera and Voice */}
+      {/* I created a custom component CustomButtonHome to optmize code */}
       <View style={styles.buttonContainer}>
         <View style={styles.row}>
           <CustomButtonHome title="Live Chat" icon={faComments} />
@@ -29,6 +37,9 @@ export default function HomeScreen({ navigation }) {
           <CustomButtonHome title="Voice" icon={faMicrophoneLines} />
         </View>
       </View>
+
+      {/* Button to navigate to Travel Phrases */}
+      {/* used onPress={() => navigation.navigate("TravelPhrases")} with the route TravelPhrases to go to the list of phrases*/}
       <Button
         title="Travel Phrases"
         iconRight
@@ -47,6 +58,7 @@ export default function HomeScreen({ navigation }) {
   );
 }
 
+// Custom style for the components on the top
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -70,7 +82,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     gap: 20,
-    // marginHorizontal: 10,
   },
   buttonImage: {
     width: 120,

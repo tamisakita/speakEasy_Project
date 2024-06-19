@@ -13,6 +13,7 @@ export default function TravelPhrasesScreen() {
         Essential Phrases at Your Fingertips
       </Text>
 
+      {/* Dynamically generate buttons for each travel phrase category */}
       {getTravelPhrasesButtonsData().map((button) => (
         <CustomButtonTravePhrases
           key={button.title}
@@ -25,6 +26,7 @@ export default function TravelPhrasesScreen() {
   );
 }
 
+// custom styles for the TravelPhrasesScreen component
 const styles = StyleSheet.create({
   container: {
     flex: 1,
