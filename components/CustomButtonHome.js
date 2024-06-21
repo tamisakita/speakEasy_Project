@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Dimensions } from "react-native";
+import { Dimensions } from "react-native";
 import { Button } from "@rneui/themed";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
@@ -19,18 +19,21 @@ export default function CustomButtonHome({ title, icon }) {
     };
 
     // Add event listener for screen dimension changes
-    Dimensions.addEventListener("change", updateButtonWidth);
+    const subscription = Dimensions.addEventListener(
+      "change",
+      updateButtonWidth
+    );
 
     // Clean up the event listener on component unmount
     return () => {
-      Dimensions.removeEventListener("change", updateButtonWidth);
+      subscription?.remove();
     };
   }, []);
 
   return (
     // for this custom button I've used the Button component from @rneui/themed with its respective props
     <Button
-      buttonStyle={{ width: buttonWidth, height: buttonWidth }}
+      buttonStyle={{ width: buttonWidth, height: buttonWidth - 30 }}
       title={title}
       icon={<FontAwesomeIcon icon={icon} size={55} color="white" />}
       iconPosition="top"

@@ -17,7 +17,8 @@ const CustomHeader = () => {
   };
 
   // Verification to know if Im in Home page so I dont need to show the go back button
-  const shouldShowBackButton = route.name !== "Home";
+  const shouldShowBackButton =
+    route.name !== "Home" && route.name !== "HomeScreen";
 
   return (
     <Header
