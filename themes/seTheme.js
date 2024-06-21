@@ -16,7 +16,7 @@ export const seTheme = createTheme({
         color: themePalette.primary,
         fontWeight: "regular",
         fontFamily: "Poppins_700Bold",
-        fontSize: 50,
+        fontSize: 40,
       },
       h2Style: {
         color: themePalette.primary,
@@ -37,6 +37,7 @@ export const seTheme = createTheme({
         fontSize: 20,
       },
       style: {
+        fontWeight: "regular",
         fontFamily: "Poppins_400Regular",
         fontSize: 20,
       },

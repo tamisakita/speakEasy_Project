@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, ScrollView } from "react-native";
 import { Text } from "@rneui/themed";
 
 import { getTravelPhrasesButtonsData } from "../data/travel-phrases-buttons-data";
@@ -7,22 +7,24 @@ import CustomButtonTravePhrases from "../components/CustomButtonTravelPhrases";
 
 export default function TravelPhrasesScreen() {
   return (
-    <View style={styles.container}>
-      <Text h2>Travel Phrases</Text>
-      <Text h4 style={styles.header4}>
-        Essential Phrases at Your Fingertips
-      </Text>
+    <ScrollView>
+      <View style={styles.container}>
+        <Text h2>Travel Phrases</Text>
+        <Text h4 style={styles.header4}>
+          Essential Phrases at Your Fingertips
+        </Text>
 
-      {/* Dynamically generate buttons for each travel phrase category */}
-      {getTravelPhrasesButtonsData().map((button) => (
-        <CustomButtonTravePhrases
-          key={button.title}
-          title={button.title}
-          icon={button.icon}
-          route={button.route}
-        />
-      ))}
-    </View>
+        {/* Dynamically generate buttons for each travel phrase category */}
+        {getTravelPhrasesButtonsData().map((button) => (
+          <CustomButtonTravePhrases
+            key={button.title}
+            title={button.title}
+            icon={button.icon}
+            route={button.route}
+          />
+        ))}
+      </View>
+    </ScrollView>
   );
 }
 
