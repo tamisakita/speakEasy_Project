@@ -30,12 +30,32 @@ export default function HomeScreen({ navigation }) {
       {/* I created a custom component CustomButtonHome to optmize code */}
       <View style={styles.buttonContainer}>
         <View style={styles.row}>
-          <CustomButtonHome title="Live Chat" icon={faComments} />
-          <CustomButtonHome title="Text" icon={faKeyboard} />
+          <CustomButtonHome
+            title="Live Chat"
+            icon={faComments}
+            route="ChatScreen"
+            navigation={navigation}
+          />
+          <CustomButtonHome
+            title="Text"
+            icon={faKeyboard}
+            route="ChatScreen"
+            navigation={navigation}
+          />
         </View>
         <View style={styles.row}>
-          <CustomButtonHome title="Camera" icon={faCameraRetro} />
-          <CustomButtonHome title="Voice" icon={faMicrophoneLines} />
+          <CustomButtonHome
+            title="Camera"
+            icon={faCameraRetro}
+            route="ChatScreen"
+            navigation={navigation}
+          />
+          <CustomButtonHome
+            title="Voice"
+            icon={faMicrophoneLines}
+            route="ChatScreen"
+            navigation={navigation}
+          />
         </View>
       </View>
 
