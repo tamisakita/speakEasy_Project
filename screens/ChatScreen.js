@@ -6,6 +6,8 @@ import ChatInput from "../components/ChatInput";
 import ChatMessage from "../components/ChatMessage";
 
 const ChatScreen = () => {
+  // creating a hook to update the messages on the chat
+  // initializing initial message from the chat with the hook useState
   const [messages, setMessages] = useState([
     {
       sender: "SpeakEasy",
@@ -13,6 +15,7 @@ const ChatScreen = () => {
     },
   ]);
 
+  // function to handle sending a message
   const handleSend = async (message) => {
     const userMessage = { sender: "Camila", message };
     setMessages((prevMessages) => [...prevMessages, userMessage]);
@@ -24,9 +27,9 @@ const ChatScreen = () => {
     } catch (error) {
       Alert.alert(
         "Error",
-        "Failed to communicate with OpenAI. Please try again later."
+        "Failed to communicate with SpeakEasy Chat. Please try again later."
       );
-      console.error("Error communicating with OpenAI:", error);
+      console.error(error);
     }
   };
 
@@ -39,6 +42,7 @@ const ChatScreen = () => {
         style={styles.chatContainer}
         contentContainerStyle={{ flexGrow: 1, justifyContent: "flex-end" }}
       >
+        {/* mapping over the messages array to render each message using the ChatMessage component */}
         {messages.map((msg, index) => (
           <ChatMessage key={index} sender={msg.sender} message={msg.message} />
         ))}
@@ -55,7 +59,7 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: "center",
-    marginVertical: 20,
+    marginVertical: 10,
   },
   chatContainer: {
     flex: 1,

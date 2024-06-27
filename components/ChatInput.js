@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, TextInput, StyleSheet, TouchableOpacity } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faMicrophone } from "@fortawesome/free-solid-svg-icons";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 const ChatInput = ({ onSend }) => {
   const [message, setMessage] = useState("");
@@ -23,7 +23,7 @@ const ChatInput = ({ onSend }) => {
         placeholderTextColor={"#000"}
       />
       <TouchableOpacity onPress={handleSend} style={styles.sendButton}>
-        <FontAwesomeIcon icon={faMicrophone} size={24} color={"#000"} />
+        <FontAwesomeIcon icon={faPaperPlane} size={24} color={"#000"} />
       </TouchableOpacity>
     </View>
   );
@@ -38,7 +38,8 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: "#ddd",
     borderRadius: 50,
-    margin: 20,
+    marginHorizontal: 20,
+    marginVertical: 10,
   },
   input: {
     flex: 1,

@@ -1,12 +1,14 @@
+// importing axios library for making HTTP requests
 import axios from "axios";
+// importing the API key from .env file for security
 import { OPENAI_API_KEY } from "@env";
 
+// creating a variable with API uri to use it later on the post request
 const API_URL = "https://api.openai.com/v1/chat/completions";
 
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-const getOpenaiService = async (prompt, retries = 3, backoff = 3000) => {
+const getOpenaiService = async (prompt) => {
   try {
+    // doing a POST request to the API with axios
     const response = await axios.post(
       API_URL,
       {
@@ -17,7 +19,7 @@ const getOpenaiService = async (prompt, retries = 3, backoff = 3000) => {
             content: prompt,
           },
         ],
-        max_tokens: 150,
+        max_tokens: 50,
       },
       {
         headers: {
@@ -28,13 +30,7 @@ const getOpenaiService = async (prompt, retries = 3, backoff = 3000) => {
     );
     return response.data.choices[0].message.content.trim();
   } catch (error) {
-    if (error.response && error.response.status === 429 && retries > 0) {
-      // If rate limited, wait for the backoff period and retry
-      console.warn(`Rate limited. Retrying in ${backoff} ms...`);
-      await sleep(backoff);
-      return getOpenaiService(prompt, retries - 1, backoff * 2); // Increase backoff for next retry
-    }
-    console.error("Error communicating with OpenAI:", error);
+    console.error(error);
     throw error;
   }
 };
