@@ -9,7 +9,7 @@ const calculateButtonWidth = () => {
   return width / 2 - 30; // Adjust the calculation as needed
 };
 
-export default function CustomButtonHome({ title, icon }) {
+export default function CustomButtonHome({ title, icon, route, navigation }) {
   const [buttonWidth, setButtonWidth] = useState(calculateButtonWidth);
 
   // Use useEffect to handle screen resizing
@@ -37,6 +37,7 @@ export default function CustomButtonHome({ title, icon }) {
       title={title}
       icon={<FontAwesomeIcon icon={icon} size={55} color="white" />}
       iconPosition="top"
+      onPress={() => navigation.navigate(route)}
     ></Button>
   );
 }
