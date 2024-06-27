@@ -12,6 +12,7 @@ import RestaurantPhrasesScreen from "../screens/RestaurantPhrasesScreen";
 import TransportPhrasesScreen from "../screens/TransportPhrasesScreen";
 import GroceriesPhrasesScreen from "../screens/GroceriesPhrasesScreen";
 import ChatScreen from "../screens/ChatScreen";
+import TextScreen from "../screens/TextScreen";
 
 // Create a navigation stack
 const Stack = createNativeStackNavigator();
@@ -45,6 +46,8 @@ export function MainNavigator() {
     <Stack.Navigator screenOptions={{ header: () => <CustomHeader /> }}>
       <Stack.Screen name="HomeScreen" component={TabNavigator} />
       <Stack.Screen name="ChatScreen" component={ChatScreen} />
+      <Stack.Screen name="TextScreen" component={TextScreen} />
+      <Stack.Screen name="VoiceScreen" component={TextScreen} />
       <Stack.Screen name="TravelPhrases" component={TravelPhrasesScreen} />
       <Stack.Screen name="AirportPhrases" component={AirportPhrasesScreen} />
       <Stack.Screen

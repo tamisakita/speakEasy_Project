@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, ScrollView, StyleSheet, Alert } from "react-native";
 import { Text } from "@rneui/themed";
-import { getOpenaiService } from "../service/openaiService";
+import { getOpenaiService } from "../api/openAi";
 import ChatInput from "../components/ChatInput";
 import ChatMessage from "../components/ChatMessage";
 

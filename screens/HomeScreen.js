@@ -39,7 +39,7 @@ export default function HomeScreen({ navigation }) {
           <CustomButtonHome
             title="Text"
             icon={faKeyboard}
-            route="ChatScreen"
+            route="TextScreen"
             navigation={navigation}
           />
         </View>
@@ -53,7 +53,7 @@ export default function HomeScreen({ navigation }) {
           <CustomButtonHome
             title="Voice"
             icon={faMicrophoneLines}
-            route="ChatScreen"
+            route="TextScreen"
             navigation={navigation}
           />
         </View>
