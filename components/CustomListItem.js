@@ -7,10 +7,10 @@ export default function CustomListItem({ itemData }) {
   return (
     <View style={styles.container}>
       <ListItem>
-        <Text style={styles.textQuestion}>{itemData.english}</Text>
+        <Text style={styles.textQuestion}>{itemData.phrase}</Text>
       </ListItem>
       <ListItem>
-        <Text style={styles.textAnswer}>{itemData.portuguese}</Text>
+        <Text style={styles.textAnswer}>{itemData.translation}</Text>
       </ListItem>
     </View>
   );
