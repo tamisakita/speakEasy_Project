@@ -1,14 +1,6 @@
-import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  View,
-  TextInput,
-  TouchableOpacity,
-  Text,
-} from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, View, TextInput, TouchableOpacity } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-import Voice from "@react-native-voice/voice";
-
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
 import { faArrowRight, faMicrophone } from "@fortawesome/free-solid-svg-icons";
@@ -23,19 +15,6 @@ export default function TextScreen() {
   const [sourceLanguage, setSourceLanguage] = useState("en");
   const [targetLanguage, setTargetLanguage] = useState("pt");
 
-  const [result, setResult] = useState([]);
-
-  const [isListening, setIsListening] = useState(false);
-
-  useEffect(() => {
-    Voice.onSpeechError = onSpeechError;
-    Voice.onSpeechResults = onSpeechResults;
-
-    return () => {
-      Voice.destroy().then(Voice.removeAllListeners);
-    };
-  }, []);
-
   const handleTranslate = async () => {
     if (inputText) {
       const translation = await getTranslationText(inputText, targetLanguage);
@@ -43,39 +22,9 @@ export default function TextScreen() {
     }
   };
 
-  const startVoiceInput = async () => {
-    try {
-      await Voice.start("en-US");
-      setIsListening(true);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  const stopVoiceInput = async () => {
-    try {
-      await Voice.stop();
-      setIsListening(false);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
   const handleVoiceInput = () => {
+    // Implement voice input functionality here
     console.log("Voice input button pressed");
-    if (isListening) {
-      stopVoiceInput();
-    } else {
-      startVoiceInput();
-    }
-  };
-
-  const onSpeechResults = (result) => {
-    setResult(result.value);
-  };
-
-  const onSpeechError = (error) => {
-    console.log(error);
   };
 
   return (
@@ -88,9 +37,6 @@ export default function TextScreen() {
         onSubmitEditing={handleTranslate}
         returnKeyType="go"
       />
-      {result.map((result, index) => (
-        <Text key={index}>{result}</Text>
-      ))}
       <View style={styles.languageContainer}>
         <View style={styles.pickerContainer}>
           <Picker
@@ -131,16 +77,9 @@ export default function TextScreen() {
         editable={false}
         placeholder="Translation will appear here"
       />
-
-      {isListening ? (
-        <TouchableOpacity style={styles.voiceButton} onPress={handleVoiceInput}>
-          stop!
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity style={styles.voiceButton} onPress={handleVoiceInput}>
-          <FontAwesomeIcon icon={faMicrophone} size={35} color="white" />
-        </TouchableOpacity>
-      )}
+      <TouchableOpacity style={styles.voiceButton} onPress={handleVoiceInput}>
+        <FontAwesomeIcon icon={faMicrophone} size={35} color="white" />
+      </TouchableOpacity>
     </View>
   );
 }

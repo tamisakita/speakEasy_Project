@@ -33,7 +33,7 @@ export default function CustomButtonHome({ title, icon, route, navigation }) {
   return (
     // for this custom button I've used the Button component from @rneui/themed with its respective props
     <Button
-      buttonStyle={{ width: buttonWidth, height: buttonWidth - 30 }}
+      buttonStyle={{ width: buttonWidth, height: buttonWidth }}
       title={title}
       icon={<FontAwesomeIcon icon={icon} size={55} color="white" />}
       iconPosition="top"
