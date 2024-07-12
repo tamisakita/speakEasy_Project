@@ -43,11 +43,12 @@ export default function HomeScreen({ navigation }) {
             navigation={navigation}
           />
         </View>
-        <View style={styles.row}>
+        {/* Camera e Voice translation will be implemented in the future */}
+        {/* <View style={styles.row}>
           <CustomButtonHome
             title="Camera"
             icon={faCameraRetro}
-            route="ChatScreen"
+            route="CameraScreen"
             navigation={navigation}
           />
           <CustomButtonHome
@@ -56,7 +57,7 @@ export default function HomeScreen({ navigation }) {
             route="TextScreen"
             navigation={navigation}
           />
-        </View>
+        </View> */}
       </View>
 
       {/* Button to navigate to Travel Phrases */}
@@ -91,6 +92,7 @@ const styles = StyleSheet.create({
   leftAlignText: {
     textAlign: "left",
     width: "100%",
+    paddingBottom: 10,
   },
   buttonContainer: {
     flexDirection: "column",
@@ -105,18 +107,20 @@ const styles = StyleSheet.create({
     gap: 20,
   },
   buttonImage: {
-    width: 120,
-    height: 120,
+    width: 160,
+    height: 160,
     resizeMode: "cover",
     marginLeft: 10,
   },
   travelPhrasesContainer: {
     width: "100%",
-    justifyContent: "space-between",
   },
   travelPhrasesButton: {
     backgroundColor: "rgba(250, 250, 250, 0.5)",
     borderWidth: 2,
     borderColor: "rgba(92, 60, 139, 0.5)",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    height: 240,
   },
 });
