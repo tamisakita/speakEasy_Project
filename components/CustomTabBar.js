@@ -1,12 +1,7 @@
 import React from "react";
 import { View, TouchableOpacity, StyleSheet, Text } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import {
-  faHome,
-  faHeart,
-  faCog,
-  faQuestionCircle,
-} from "@fortawesome/free-solid-svg-icons";
+import { faHome, faHeart, faUser } from "@fortawesome/free-solid-svg-icons";
 
 // Custom tab bar component
 export default function CustomTabBar({ state, descriptors, navigation }) {
@@ -14,8 +9,7 @@ export default function CustomTabBar({ state, descriptors, navigation }) {
   const icons = {
     Home: faHome,
     Favourites: faHeart,
-    Settings: faCog,
-    Help: faQuestionCircle,
+    Profile: faUser,
   };
 
   return (
@@ -65,7 +59,7 @@ export default function CustomTabBar({ state, descriptors, navigation }) {
               {/* Render the icon */}
               <FontAwesomeIcon
                 icon={icon}
-                size={24}
+                size={26}
                 color={isFocused ? "#673ab7" : "#222"}
               />
               {/* Render the label */}
@@ -73,7 +67,8 @@ export default function CustomTabBar({ state, descriptors, navigation }) {
                 style={{
                   color: isFocused ? "#673ab7" : "#222",
                   fontFamily: "Poppins_400Regular",
-                  fontSize: 13,
+                  fontSize: 15,
+                  paddingTop: 4,
                 }}
               >
                 {label}
@@ -89,7 +84,7 @@ export default function CustomTabBar({ state, descriptors, navigation }) {
 // Styles for the custom tab bar
 const styles = StyleSheet.create({
   container: {
-    paddingBottom: 10,
+    paddingVertical: 10,
     paddingHorizontal: 20,
     backgroundColor: "#E0DBE8",
   },

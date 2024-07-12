@@ -1,9 +1,9 @@
 import { StyleSheet, View, ScrollView } from "react-native";
 import { Text } from "@rneui/themed";
 
-import { getTravelPhrasesButtonsData } from "../data/travel-phrases-buttons-data";
+import { getTravelPhrasesButtonsData } from "../../data/travel-phrases-buttons-data";
 
-import CustomButtonTravePhrases from "../components/CustomButtonTravelPhrases";
+import CustomButtonTravePhrases from "../../components/CustomButtonTravelPhrases";
 
 export default function TravelPhrasesScreen() {
   return (

@@ -4,11 +4,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import HomeScreen from "../screens/HomeScreen";
 import CustomTabBar from "../components/CustomTabBar";
+import ProfileScreen from "../screens/ProfileScreen";
 
 // Mocked screens for future tab screens
 const MockScreenFav = () => <></>;
-const MockScreenSet = () => <></>;
-const MockScreenHelp = () => <></>;
 
 const Tab = createBottomTabNavigator();
 
@@ -22,8 +21,7 @@ export function TabNavigator() {
       {/* Defined tab screens */}
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Favourites" component={MockScreenFav} />
-      <Tab.Screen name="Settings" component={MockScreenSet} />
-      <Tab.Screen name="Help" component={MockScreenHelp} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
 }

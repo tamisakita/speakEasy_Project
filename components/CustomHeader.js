@@ -1,7 +1,5 @@
 import React from "react";
 import { Header } from "@rneui/base";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import { useRoute, useNavigation } from "@react-navigation/native";
 
 // Custom header component for the application
@@ -36,6 +34,7 @@ const CustomHeader = () => {
       }}
       containerStyle={{
         width: "100%",
+        elevation: 5,
       }}
       // Go back button
       leftComponent={
@@ -47,9 +46,6 @@ const CustomHeader = () => {
         }
       }
       // Profile Button
-      rightComponent={
-        <FontAwesomeIcon icon={faCircleUser} size={45} color="black" />
-      }
     />
   );
 };

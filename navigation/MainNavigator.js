@@ -13,11 +13,11 @@ import CustomHeader from "../components/CustomHeader";
 
 // Imported screens
 import AuthScreen from "../screens/auth/AuthScreen";
-import TravelPhrasesScreen from "../screens/TravelPhrasesScreen";
-import AirportPhrasesScreen from "../screens/AirportPhrasesScreen";
-import RestaurantPhrasesScreen from "../screens/RestaurantPhrasesScreen";
-import TransportPhrasesScreen from "../screens/TransportPhrasesScreen";
-import GroceriesPhrasesScreen from "../screens/GroceriesPhrasesScreen";
+import TravelPhrasesScreen from "../screens/phrases/TravelPhrasesScreen";
+import AirportPhrasesScreen from "../screens/phrases/AirportPhrasesScreen";
+import RestaurantPhrasesScreen from "../screens/phrases/RestaurantPhrasesScreen";
+import TransportPhrasesScreen from "../screens/phrases/TransportPhrasesScreen";
+import GroceriesPhrasesScreen from "../screens/phrases/GroceriesPhrasesScreen";
 import ChatScreen from "../screens/ChatScreen";
 import TextScreen from "../screens/TextScreen";
 
