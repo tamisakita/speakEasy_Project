@@ -1,4 +1,4 @@
-import PhrasesLayout from "../components/PhrasesLayout";
+import PhrasesLayout from "../../components/PhrasesLayout";
 
 //Component to display airport related phrases
 export default function AirportPhrasesScreen() {
