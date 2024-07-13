@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, TextInput, StyleSheet, Text } from "react-native";
 import { Button } from "@rneui/themed";
 
@@ -10,6 +10,17 @@ const SignUpScreen = ({
   handleSignUp,
   navigation,
 }) => {
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSignUpWithValidation = () => {
+    if (password === confirmPassword) {
+      handleSignUp();
+    } else {
+      setErrorMessage("Passwords do not match");
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Travel, Talk, Connect!</Text>
@@ -29,8 +40,22 @@ const SignUpScreen = ({
         onChangeText={setPassword}
         secureTextEntry
       />
+      <TextInput
+        style={styles.input}
+        placeholder="Confirm password"
+        value={confirmPassword}
+        onChangeText={setConfirmPassword}
+        secureTextEntry
+      />
+      {errorMessage ? (
+        <Text style={styles.errorText}>{errorMessage}</Text>
+      ) : null}
       <View style={styles.buttonContainer}>
-        <Button title="Sign Up" onPress={handleSignUp} style={styles.button} />
+        <Button
+          title="Sign Up"
+          onPress={handleSignUpWithValidation}
+          style={styles.button}
+        />
       </View>
       <View>
         <Text style={styles.loginText}>
@@ -107,6 +132,11 @@ const styles = StyleSheet.create({
   loginLink: {
     color: "#5C3C8B",
     fontFamily: "Poppins_700Bold",
+  },
+  errorText: {
+    fontFamily: "Poppins_700Bold",
+    marginBottom: 10,
+    color: "red",
   },
 });
 

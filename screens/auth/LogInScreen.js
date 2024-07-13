@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, TextInput, StyleSheet, Text } from "react-native";
 import { Button } from "@rneui/themed";
 
@@ -10,9 +10,29 @@ const LogInScreen = ({
   handleLogin,
   navigation,
 }) => {
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleLoginWithValidation = async () => {
+    try {
+      const loginSuccessful = await handleLogin();
+
+      if (!loginSuccessful) {
+        setErrorMessage("Incorrect email or password");
+      } else {
+        setErrorMessage("");
+      }
+    } catch (error) {
+      console.log(error);
+      setErrorMessage("Login failed. Please try again.");
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome Back!</Text>
+      {errorMessage ? (
+        <Text style={styles.errorText}>{errorMessage}</Text>
+      ) : null}
       <TextInput
         style={styles.input}
         placeholder="Email address"
@@ -29,7 +49,11 @@ const LogInScreen = ({
         secureTextEntry
       />
       <View style={styles.buttonContainer}>
-        <Button title="Log In" onPress={handleLogin} style={styles.button} />
+        <Button
+          title="Log In"
+          onPress={handleLoginWithValidation}
+          style={styles.button}
+        />
       </View>
       <View>
         <Text style={styles.loginText}>
@@ -106,6 +130,11 @@ const styles = StyleSheet.create({
   loginLink: {
     color: "#5C3C8B",
     fontFamily: "Poppins_700Bold",
+  },
+  errorText: {
+    fontFamily: "Poppins_700Bold",
+    marginBottom: 10,
+    color: "red",
   },
 });
 

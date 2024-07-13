@@ -50,7 +50,7 @@ export function MainNavigator() {
   const handleLogin = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      console.log("User signed in successfully!");
+      console.log("User Loged in successfully!");
     } catch (error) {
       console.error("Login error:", error.message);
     }
