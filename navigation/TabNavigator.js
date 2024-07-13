@@ -12,7 +12,7 @@ const MockScreenFav = () => <></>;
 const Tab = createBottomTabNavigator();
 
 // Tab Menu using bottom-tabs
-export function TabNavigator() {
+export function TabNavigator({ user, handleAuthentication }) {
   return (
     <Tab.Navigator
       tabBar={(props) => <CustomTabBar {...props} />}
@@ -21,7 +21,14 @@ export function TabNavigator() {
       {/* Defined tab screens */}
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Favourites" component={MockScreenFav} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen name="Profile">
+        {() => (
+          <ProfileScreen
+            user={user}
+            handleAuthentication={handleAuthentication}
+          />
+        )}
+      </Tab.Screen>
     </Tab.Navigator>
   );
 }

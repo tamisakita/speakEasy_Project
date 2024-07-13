@@ -1,13 +1,14 @@
-import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import React from "react";
+import { View, TextInput, StyleSheet, Text } from "react-native";
+import { Button } from "@rneui/themed";
 
-const AuthScreen = ({
+const SignUpScreen = ({
   email,
   setEmail,
   password,
   setPassword,
-  isLogin,
-  setIsLogin,
-  handleAuthentication,
+  handleSignUp,
+  navigation,
 }) => {
   return (
     <View style={styles.container}>
@@ -28,20 +29,18 @@ const AuthScreen = ({
         onChangeText={setPassword}
         secureTextEntry
       />
-
       <View style={styles.buttonContainer}>
-        <Button
-          title={isLogin ? "Log In" : "Sign Up"}
-          onPress={handleAuthentication}
-          style={styles.button}
-        ></Button>
+        <Button title="Sign Up" onPress={handleSignUp} style={styles.button} />
       </View>
-
       <View>
-        <Text style={styles.loginText} onPress={() => setIsLogin(!isLogin)}>
-          {isLogin
-            ? "Need an account? Sign Up"
-            : "Already have an account? Log In"}
+        <Text style={styles.loginText}>
+          Already have an account?{" "}
+          <Text
+            style={styles.loginLink}
+            onPress={() => navigation.navigate("Login")}
+          >
+            Log In
+          </Text>
         </Text>
       </View>
     </View>
@@ -53,31 +52,39 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#EAEAEA",
+    backgroundColor: "#E0DBE8",
     padding: 20,
   },
   title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#4C1D95",
+    color: "#5C3C8B",
+    fontFamily: "Poppins_700Bold",
+    fontSize: 30,
     marginBottom: 10,
+    width: "100%",
+    textAlign: "center",
   },
   subtitle: {
-    fontSize: 18,
-    color: "#6B21A8",
-    marginBottom: 30,
+    fontSize: 30,
+    color: "#5C3C8B",
+    fontFamily: "Poppins_400Regular",
+    marginBottom: 28,
+    textAlign: "center",
   },
   input: {
     width: "100%",
-    height: 50,
+    height: 60,
     borderColor: "#4C1D95",
+    backgroundColor: "#fff",
+    fontFamily: "Poppins_400Regular",
+    fontSize: 20,
     borderWidth: 1,
-    borderRadius: 25,
-    paddingHorizontal: 15,
+    borderRadius: 50,
+    paddingHorizontal: 25,
     marginBottom: 20,
   },
   buttonContainer: {
-    marginBottom: 16,
+    width: "100%",
+    marginBottom: 20,
   },
   button: {
     width: "100%",
@@ -86,7 +93,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 25,
-    marginBottom: 20,
   },
   buttonText: {
     color: "#FFF",
@@ -94,12 +100,14 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   loginText: {
-    color: "#000",
+    color: "#5C3C8B",
+    fontFamily: "Poppins_400Regular",
+    fontSize: 20,
   },
   loginLink: {
-    color: "#6B21A8",
-    fontWeight: "bold",
+    color: "#5C3C8B",
+    fontFamily: "Poppins_700Bold",
   },
 });
 
-export default AuthScreen;
+export default SignUpScreen;

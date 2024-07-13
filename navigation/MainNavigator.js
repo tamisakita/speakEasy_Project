@@ -12,7 +12,9 @@ import { firebaseConfig } from "../config/firebaseConfig";
 import CustomHeader from "../components/CustomHeader";
 
 // Imported screens
-import AuthScreen from "../screens/auth/AuthScreen";
+import WelcomeScreen from "../screens/auth/WelcomeScreen";
+import LogInScreen from "../screens/auth/LogInScreen";
+import SignUpScreen from "../screens/auth/SignUpScreen";
 import TravelPhrasesScreen from "../screens/phrases/TravelPhrasesScreen";
 import AirportPhrasesScreen from "../screens/phrases/AirportPhrasesScreen";
 import RestaurantPhrasesScreen from "../screens/phrases/RestaurantPhrasesScreen";
@@ -34,7 +36,6 @@ export function MainNavigator() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null); // Track user authentication state
-  const [isLogin, setIsLogin] = useState(true);
 
   const auth = getAuth(app);
 
@@ -46,26 +47,21 @@ export function MainNavigator() {
     return () => unsubscribe();
   }, [auth]);
 
-  const handleAuthentication = async () => {
+  const handleLogin = async () => {
     try {
-      if (user) {
-        // If user is already authenticated, log out
-        console.log("User logged out successfully!");
-        await signOut(auth);
-      } else {
-        // Sign in or sign up
-        if (isLogin) {
-          // Sign in
-          await signInWithEmailAndPassword(auth, email, password);
-          console.log("User signed in successfully!");
-        } else {
-          // Sign up
-          await createUserWithEmailAndPassword(auth, email, password);
-          console.log("User created successfully!");
-        }
-      }
+      await signInWithEmailAndPassword(auth, email, password);
+      console.log("User signed in successfully!");
     } catch (error) {
-      console.error("Authentication error:", error.message);
+      console.error("Login error:", error.message);
+    }
+  };
+
+  const handleSignUp = async () => {
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      console.log("User created successfully!");
+    } catch (error) {
+      console.error("Sign up error:", error.message);
     }
   };
 
@@ -73,7 +69,17 @@ export function MainNavigator() {
     <Stack.Navigator screenOptions={{ header: () => <CustomHeader /> }}>
       {user ? (
         <>
-          <Stack.Screen name="HomeScreen" component={TabNavigator} />
+          <Stack.Screen name="HomeScreen">
+            {() => (
+              <TabNavigator
+                user={user}
+                handleAuthentication={async () => {
+                  await signOut(auth);
+                  console.log("User logged out successfully!");
+                }}
+              />
+            )}
+          </Stack.Screen>
           <Stack.Screen name="ChatScreen" component={ChatScreen} />
           <Stack.Screen name="TextScreen" component={TextScreen} />
           {/* <Stack.Screen name="VoiceScreen" component={TextScreen} /> */}
@@ -98,16 +104,32 @@ export function MainNavigator() {
         </>
       ) : (
         <>
-          <Stack.Screen name="Auth">
-            {() => (
-              <AuthScreen
+          <Stack.Screen
+            name="Welcome"
+            component={WelcomeScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen name="Login" options={{ headerShown: false }}>
+            {(props) => (
+              <LogInScreen
+                {...props}
                 email={email}
                 setEmail={setEmail}
                 password={password}
                 setPassword={setPassword}
-                isLogin={isLogin}
-                setIsLogin={setIsLogin}
-                handleAuthentication={handleAuthentication}
+                handleLogin={handleLogin}
+              />
+            )}
+          </Stack.Screen>
+          <Stack.Screen name="SignUp" options={{ headerShown: false }}>
+            {(props) => (
+              <SignUpScreen
+                {...props}
+                email={email}
+                setEmail={setEmail}
+                password={password}
+                setPassword={setPassword}
+                handleSignUp={handleSignUp}
               />
             )}
           </Stack.Screen>

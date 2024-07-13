@@ -1,30 +1,30 @@
 import { StyleSheet, View } from "react-native";
 import { Text, Button } from "@rneui/themed";
 
-export default function ProfileScreen() {
+const ProfileScreen = ({ user, handleAuthentication }) => {
   return (
     <View style={styles.container}>
       <Text h1>Profile</Text>
       <View style={styles.fieldContainer}>
         <Text h4>Name:</Text>
-        <Text>my name</Text>
+        <Text>Camila</Text>
       </View>
 
       <View style={styles.fieldContainer}>
         <Text h4>Email:</Text>
-        <Text>my name</Text>
+        <Text>{user.email}</Text>
       </View>
 
       <Button
-        title="Sign Out"
         containerStyle={styles.buttonContainer}
         buttonStyle={styles.buttonStyle}
         titleStyle={{ color: "#fff" }}
-        onPress={() => navigation.navigate("TravelPhrases")}
+        title="Logout"
+        onPress={handleAuthentication}
       />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -46,3 +46,5 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
 });
+
+export default ProfileScreen;
