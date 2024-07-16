@@ -20,6 +20,9 @@ import { seTheme } from "./themes/seTheme";
 // Navigation setup
 import { MainNavigator } from "./navigation/MainNavigator";
 
+// Import AuthProvider
+import { AuthProvider } from "./context/AuthContext";
+
 export default function App() {
   // Load fonts asynchronously
   let [fontsLoaded] = useFonts({
@@ -41,9 +44,11 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <ThemeProvider theme={seTheme}>
-        <NavigationContainer>
-          <MainNavigator />
-        </NavigationContainer>
+        <AuthProvider>
+          <NavigationContainer>
+            <MainNavigator />
+          </NavigationContainer>
+        </AuthProvider>
       </ThemeProvider>
     </SafeAreaProvider>
   );

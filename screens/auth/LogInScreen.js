@@ -1,20 +1,17 @@
 import React, { useState } from "react";
 import { View, TextInput, StyleSheet, Text } from "react-native";
 import { Button } from "@rneui/themed";
+import { useAuth } from "../../context/AuthContext";
 
-const LogInScreen = ({
-  email,
-  setEmail,
-  password,
-  setPassword,
-  handleLogin,
-  navigation,
-}) => {
+const LogInScreen = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const { handleLogin } = useAuth();
 
   const handleLoginWithValidation = async () => {
     try {
-      const loginSuccessful = await handleLogin();
+      const loginSuccessful = await handleLogin(email, password);
 
       if (!loginSuccessful) {
         setErrorMessage("Incorrect email or password");

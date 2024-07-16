@@ -1,23 +1,28 @@
 import React, { useState } from "react";
 import { View, TextInput, StyleSheet, Text } from "react-native";
 import { Button } from "@rneui/themed";
+import { useAuth } from "../../context/AuthContext";
 
-const SignUpScreen = ({
-  email,
-  setEmail,
-  password,
-  setPassword,
-  handleSignUp,
-  navigation,
-}) => {
+const SignUpScreen = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const { handleSignUp } = useAuth();
 
-  const handleSignUpWithValidation = () => {
-    if (password === confirmPassword) {
-      handleSignUp();
-    } else {
+  const handleSignUpWithValidation = async () => {
+    if (password !== confirmPassword) {
       setErrorMessage("Passwords do not match");
+      return;
+    }
+
+    const signUpSuccessful = await handleSignUp(email, password);
+
+    if (!signUpSuccessful) {
+      setErrorMessage("Sign up failed. Please try again.");
+    } else {
+      setErrorMessage("");
+      navigation.navigate("Login");
     }
   };
 

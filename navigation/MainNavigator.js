@@ -1,14 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-} from "@firebase/auth";
-import { initializeApp } from "@firebase/app";
-import { firebaseConfig } from "../config/firebaseConfig";
+
+import { useAuth } from "../context/AuthContext";
+
+// header
 import CustomHeader from "../components/CustomHeader";
 
 // Imported screens
@@ -23,47 +18,16 @@ import GroceriesPhrasesScreen from "../screens/phrases/GroceriesPhrasesScreen";
 import ChatScreen from "../screens/ChatScreen";
 import TextScreen from "../screens/TextScreen";
 
+// Tab menu
 import { TabNavigator } from "./TabNavigator";
 
 // Create a navigation stack
 const Stack = createNativeStackNavigator();
 
-const app = initializeApp(firebaseConfig);
-
 // Stack Navigator for Home
 // I place the component for home as TabNavigator, so only home will have the Tab Menu
 export function MainNavigator() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [user, setUser] = useState(null); // Track user authentication state
-
-  const auth = getAuth(app);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
-    });
-
-    return () => unsubscribe();
-  }, [auth]);
-
-  const handleLogin = async () => {
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      console.log("User Loged in successfully!");
-    } catch (error) {
-      console.error("Login error:", error.message);
-    }
-  };
-
-  const handleSignUp = async () => {
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      console.log("User created successfully!");
-    } catch (error) {
-      console.error("Sign up error:", error.message);
-    }
-  };
+  const { user, handleLogout } = useAuth();
 
   return (
     <Stack.Navigator screenOptions={{ header: () => <CustomHeader /> }}>
@@ -71,13 +35,7 @@ export function MainNavigator() {
         <>
           <Stack.Screen name="HomeScreen">
             {() => (
-              <TabNavigator
-                user={user}
-                handleAuthentication={async () => {
-                  await signOut(auth);
-                  console.log("User logged out successfully!");
-                }}
-              />
+              <TabNavigator user={user} handleAuthentication={handleLogout} />
             )}
           </Stack.Screen>
           <Stack.Screen name="ChatScreen" component={ChatScreen} />
@@ -110,28 +68,10 @@ export function MainNavigator() {
             options={{ headerShown: false }}
           />
           <Stack.Screen name="Login" options={{ headerShown: false }}>
-            {(props) => (
-              <LogInScreen
-                {...props}
-                email={email}
-                setEmail={setEmail}
-                password={password}
-                setPassword={setPassword}
-                handleLogin={handleLogin}
-              />
-            )}
+            {(props) => <LogInScreen {...props} />}
           </Stack.Screen>
           <Stack.Screen name="SignUp" options={{ headerShown: false }}>
-            {(props) => (
-              <SignUpScreen
-                {...props}
-                email={email}
-                setEmail={setEmail}
-                password={password}
-                setPassword={setPassword}
-                handleSignUp={handleSignUp}
-              />
-            )}
+            {(props) => <SignUpScreen {...props} />}
           </Stack.Screen>
         </>
       )}
