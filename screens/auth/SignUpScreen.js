@@ -1,15 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, TextInput, StyleSheet, Text } from "react-native";
 import { Button } from "@rneui/themed";
+import { useAuth } from "../../context/AuthContext";
 
-const SignUpScreen = ({
-  email,
-  setEmail,
-  password,
-  setPassword,
-  handleSignUp,
-  navigation,
-}) => {
+const SignUpScreen = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const { handleSignUp } = useAuth();
+
+  const handleSignUpWithValidation = async () => {
+    if (password !== confirmPassword) {
+      setErrorMessage("Passwords do not match");
+      return;
+    }
+
+    const signUpSuccessful = await handleSignUp(email, password);
+
+    if (!signUpSuccessful) {
+      setErrorMessage("Sign up failed. Please try again.");
+    } else {
+      setErrorMessage("");
+      navigation.navigate("Login");
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Travel, Talk, Connect!</Text>
@@ -29,8 +45,22 @@ const SignUpScreen = ({
         onChangeText={setPassword}
         secureTextEntry
       />
+      <TextInput
+        style={styles.input}
+        placeholder="Confirm password"
+        value={confirmPassword}
+        onChangeText={setConfirmPassword}
+        secureTextEntry
+      />
+      {errorMessage ? (
+        <Text style={styles.errorText}>{errorMessage}</Text>
+      ) : null}
       <View style={styles.buttonContainer}>
-        <Button title="Sign Up" onPress={handleSignUp} style={styles.button} />
+        <Button
+          title="Sign Up"
+          onPress={handleSignUpWithValidation}
+          style={styles.button}
+        />
       </View>
       <View>
         <Text style={styles.loginText}>
@@ -107,6 +137,11 @@ const styles = StyleSheet.create({
   loginLink: {
     color: "#5C3C8B",
     fontFamily: "Poppins_700Bold",
+  },
+  errorText: {
+    fontFamily: "Poppins_700Bold",
+    marginBottom: 10,
+    color: "red",
   },
 });
 

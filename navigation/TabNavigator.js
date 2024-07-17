@@ -5,9 +5,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../screens/HomeScreen";
 import CustomTabBar from "../components/CustomTabBar";
 import ProfileScreen from "../screens/ProfileScreen";
-
-// Mocked screens for future tab screens
-const MockScreenFav = () => <></>;
+import FavouritesScreen from "../screens/FavouritesScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -20,7 +18,7 @@ export function TabNavigator({ user, handleAuthentication }) {
     >
       {/* Defined tab screens */}
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Favourites" component={MockScreenFav} />
+      <Tab.Screen name="Favourites" component={FavouritesScreen} />
       <Tab.Screen name="Profile">
         {() => (
           <ProfileScreen

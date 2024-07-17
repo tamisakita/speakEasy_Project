@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_URL = "https://speakeasy-api-023e509b34be.herokuapp.com";
+const API_URL =
+  "https://speakeasy-api-023e509b34be.herokuapp.com/api/v1/phrases";
 
 const getPhrasesByCategory = async (category) => {
   try {
