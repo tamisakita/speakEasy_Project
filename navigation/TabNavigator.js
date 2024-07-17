@@ -18,7 +18,7 @@ export function TabNavigator({ user, handleAuthentication }) {
     >
       {/* Defined tab screens */}
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Favourites">{() => <FavouritesScreen />}</Tab.Screen>
+      <Tab.Screen name="Favourites" component={FavouritesScreen} />
       <Tab.Screen name="Profile">
         {() => (
           <ProfileScreen

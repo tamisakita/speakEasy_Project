@@ -37,7 +37,8 @@ export default function CustomListItem({ itemData }) {
           type="ionicon"
           size={32}
           name={isFavorite ? "heart" : "heart-outline"}
-          color={isFavorite !== null ? "#5C3C8B" : "#ffffff"}
+          // name="heart"
+          color={"#5C3C8B"}
           onPress={() => {
             toggleFav(currUserId, itemData, isFavorite, setIsFavorite);
           }}

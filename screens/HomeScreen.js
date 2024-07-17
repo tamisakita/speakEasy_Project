@@ -19,11 +19,8 @@ import CustomButtonHome from "../components/CustomButtonHome";
 export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text h2 style={styles.leftAlignText}>
-        Welcome!
-      </Text>
       <Text h1 style={styles.leftAlignText}>
-        Camila
+        Hello Camila .
       </Text>
 
       {/* Container with cutomized buttons to navigate to Live Chat, Text, Camera and Voice */}
@@ -92,6 +89,8 @@ const styles = StyleSheet.create({
   leftAlignText: {
     textAlign: "left",
     width: "100%",
+    paddingTop: 30,
+    paddingBottom: 20,
   },
   buttonContainer: {
     flexDirection: "column",

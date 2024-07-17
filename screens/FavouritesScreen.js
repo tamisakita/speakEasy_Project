@@ -9,7 +9,7 @@ import CustomListItem from "../components/CustomListItem";
 // importing AuthContext to get the user id
 import { useAuth } from "../context/AuthContext";
 
-const FavouritesScreen = () => {
+const FavouritesScreen = ({ navigation }) => {
   const { user } = useAuth();
 
   const [error, setError] = useState(null);
@@ -21,12 +21,27 @@ const FavouritesScreen = () => {
       (result) => {
         setIsLoaded(true);
         setDataResult(JSON.parse(result));
+        console.log("here");
       },
       (error) => {
         setIsLoaded(true);
         setError(error);
       }
     );
+    const willFocusSubscription = navigation.addListener("focus", () => {
+      getFavArrayByUser(user.uid).then(
+        (result) => {
+          setIsLoaded(true);
+          setDataResult(JSON.parse(result));
+        },
+        (error) => {
+          setIsLoaded(true);
+          setError(error);
+        }
+      );
+    });
+
+    return willFocusSubscription;
   }, []);
 
   return (

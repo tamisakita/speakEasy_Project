@@ -25,8 +25,9 @@ export async function updateFavArrayByUser(userId, arrFavorites) {
 }
 
 export function checkFavorite(checkKey, currFavList) {
-  let foundIndex = currFavList.findIndex((ele) => ele.id == checkKey);
+  let foundIndex = currFavList.findIndex((ele) => ele._id == checkKey);
 
+  // console.log(currFavList);
   if (foundIndex >= 0) {
     return true;
   }
@@ -37,7 +38,7 @@ export function checkFavorite(checkKey, currFavList) {
 export function addFavorite(itemData, currFavList) {
   if (!checkFavorite(itemData._id, currFavList)) {
     const phrase = {
-      id: itemData._id,
+      _id: itemData._id,
       phrase: itemData.phrase,
       translation: itemData.translation,
     };
@@ -47,7 +48,7 @@ export function addFavorite(itemData, currFavList) {
 }
 
 export function delFavorite(itemData, currFavList) {
-  let filteredList = currFavList.filter((ele) => ele.id != itemData._id);
+  let filteredList = currFavList.filter((ele) => ele._id != itemData._id);
 
   return filteredList;
 }
