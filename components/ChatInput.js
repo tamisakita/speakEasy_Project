@@ -3,9 +3,11 @@ import { View, TextInput, StyleSheet, TouchableOpacity } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
+// passed the prop onSend to define what should happen when the user presses the send button
 const ChatInput = ({ onSend }) => {
   const [message, setMessage] = useState("");
 
+  // function to handle sending the message
   const handleSend = () => {
     if (message.trim()) {
       onSend(message.trim());

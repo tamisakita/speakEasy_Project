@@ -1,6 +1,9 @@
 import { StyleSheet, View } from "react-native";
 import { Text, Button } from "@rneui/themed";
 
+// using two props
+// user to check the current user and display his information
+// and handleAuthentication to handle logout
 const ProfileScreen = ({ user, handleAuthentication }) => {
   return (
     <View style={styles.container}>

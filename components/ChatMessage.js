@@ -3,6 +3,7 @@ import { View, StyleSheet } from "react-native";
 import { Text } from "@rneui/themed";
 
 const ChatMessage = ({ message, sender }) => {
+  // checking if the sender is the user or the bot to change the colour of the background, position and text colour
   const isUser = sender === "Camila";
 
   return (
@@ -31,11 +32,11 @@ const styles = StyleSheet.create({
   },
   userMessage: {
     borderTopLeftRadius: 0,
-    alignSelf: "flex-start", // Align user messages to the left
+    alignSelf: "flex-start",
   },
   botMessage: {
     borderTopRightRadius: 0,
-    alignSelf: "flex-end", // Align bot messages to the right
+    alignSelf: "flex-end",
   },
   sender: {
     marginBottom: 5,

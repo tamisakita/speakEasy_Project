@@ -4,11 +4,15 @@ import { Button } from "@rneui/themed";
 import { useAuth } from "../../context/AuthContext";
 
 const LogInScreen = ({ navigation }) => {
+  // useState hooks for email, password, and error messages
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
+  // destructure handleLogin from AuthContext to login
   const { handleLogin } = useAuth();
 
+  // function to handle login and check if the login was successful or not to send error
   const handleLoginWithValidation = async () => {
     try {
       const loginSuccessful = await handleLogin(email, password);

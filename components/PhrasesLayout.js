@@ -12,7 +12,7 @@ export default function PhrasesLayout({ title, category }) {
     const fetchPhrases = async () => {
       try {
         const fetchedPhrases = await getPhrasesByCategory(category);
-        // console.log(fetchedPhrases);a
+        // console.log(fetchedPhrases);
         setPhrases(fetchedPhrases);
       } catch (error) {
         setError(error.message);

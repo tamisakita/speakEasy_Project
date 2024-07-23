@@ -1,10 +1,11 @@
-// WelcomeScreen.js
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Button } from "@rneui/themed";
 
 const WelcomeScreen = () => {
+  // useNavigation to access navigation object
+  // used to navigate through login and signup screens
   const navigation = useNavigation();
 
   return (
