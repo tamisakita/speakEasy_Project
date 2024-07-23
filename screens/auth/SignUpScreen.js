@@ -4,12 +4,16 @@ import { Button } from "@rneui/themed";
 import { useAuth } from "../../context/AuthContext";
 
 const SignUpScreen = ({ navigation }) => {
+  // useState hooks for email, password, confirm the passport, and error messages
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
+  // destructure handleSignUp from AuthContext to signup
   const { handleSignUp } = useAuth();
 
+  // function to handle sign up and confirm if the first password match the confirmation password
   const handleSignUpWithValidation = async () => {
     if (password !== confirmPassword) {
       setErrorMessage("Passwords do not match");

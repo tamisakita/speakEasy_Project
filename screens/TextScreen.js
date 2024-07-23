@@ -10,11 +10,14 @@ import { getLanguageOption } from "../data/language-options-data";
 import { getTranslationText } from "../api/googleCloud";
 
 export default function TextScreen() {
+  // useState hook to manage input text, translated text, and selected languages
   const [inputText, setInputText] = useState("");
   const [translatedText, setTranslatedText] = useState("");
   const [sourceLanguage, setSourceLanguage] = useState("en");
   const [targetLanguage, setTargetLanguage] = useState("pt");
 
+  // function to handle the translation process
+  // it will call the getTranslationText() function from api and update the translated text setting the translation on setTranslatedText
   const handleTranslate = async () => {
     if (inputText) {
       const translation = await getTranslationText(inputText, targetLanguage);
@@ -23,12 +26,13 @@ export default function TextScreen() {
   };
 
   const handleVoiceInput = () => {
-    // Implement voice input functionality here
+    // future voice feature
     console.log("Voice input button pressed");
   };
 
   return (
     <View style={styles.container}>
+      {/* TextInput for the user to enter text */}
       <TextInput
         style={styles.input}
         placeholder="Enter Text"
@@ -37,6 +41,8 @@ export default function TextScreen() {
         onSubmitEditing={handleTranslate}
         returnKeyType="go"
       />
+
+      {/* Container for the language pickers and translation arrow */}
       <View style={styles.languageContainer}>
         <View style={styles.pickerContainer}>
           <Picker
@@ -53,8 +59,11 @@ export default function TextScreen() {
             ))}
           </Picker>
         </View>
+
+        {/* Arrow icon to indicate translation direction */}
         <FontAwesomeIcon icon={faArrowRight} size={24} color="#5C3C8B" />
 
+        {/* Target language picker */}
         <View style={styles.pickerContainer}>
           <Picker
             style={styles.picker}
@@ -71,12 +80,16 @@ export default function TextScreen() {
           </Picker>
         </View>
       </View>
+
+      {/* TextInput to display the translated text */}
       <TextInput
         style={styles.input}
         value={translatedText}
         editable={false}
         placeholder="Translation will appear here"
       />
+
+      {/* TouchableOpacity for voice input functionality */}
       <TouchableOpacity style={styles.voiceButton} onPress={handleVoiceInput}>
         <FontAwesomeIcon icon={faMicrophone} size={35} color="white" />
       </TouchableOpacity>

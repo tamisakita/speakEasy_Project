@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View, FlatList, ActivityIndicator } from "react-native";
-import { Button, Text } from "@rneui/themed";
+
+import { Text } from "@rneui/themed";
 
 import { getFavArrayByUser } from "../services/FavouriteManager";
 
@@ -10,12 +11,15 @@ import CustomListItem from "../components/CustomListItem";
 import { useAuth } from "../context/AuthContext";
 
 const FavouritesScreen = ({ navigation }) => {
+  // getting the current user with AuthContext
   const { user } = useAuth();
 
+  // using useState hook to manage the fetched data, loading status and errors
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [dataResult, setDataResult] = useState([]);
 
+  // this hook will fetch the fav items for the current user when the component mounts and when screen gains focus
   useEffect(() => {
     getFavArrayByUser(user.uid).then(
       (result) => {
@@ -28,6 +32,8 @@ const FavouritesScreen = ({ navigation }) => {
         setError(error);
       }
     );
+
+    // event listener to re-fetch data when the screen gains focus
     const willFocusSubscription = navigation.addListener("focus", () => {
       getFavArrayByUser(user.uid).then(
         (result) => {
@@ -52,19 +58,17 @@ const FavouritesScreen = ({ navigation }) => {
   );
 };
 
+// functions to display the list of favs depending if there is an error, if its loading or if the data is not null or exist
 function displayDataContainer(error, isLoaded, dataResult) {
-  // since the flatlist will be moved to this function we'll need the renderItem in scope
   const renderItem = ({ item }) => <CustomListItem itemData={item} />;
 
   if (error) {
-    // show an error message
     return (
       <View>
         <Text>Error: {error.message}</Text>
       </View>
     );
   } else if (!isLoaded) {
-    // show the ActivityIndicator (spinner)
     return (
       <View>
         <Text>Loading...</Text>
@@ -72,14 +76,12 @@ function displayDataContainer(error, isLoaded, dataResult) {
       </View>
     );
   } else if (dataResult === null || dataResult.length === 0) {
-    // not an error but no resorts, so show a message
     return (
       <View>
         <Text>No favorites found for currently logged in user</Text>
       </View>
     );
   } else {
-    // show the data in the FlatList
     return (
       <FlatList
         style={styles.list}

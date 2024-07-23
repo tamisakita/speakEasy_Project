@@ -1,23 +1,36 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+
+// importing firebase initialization functions
 import { initializeApp } from "@firebase/app";
 import {
-  getAuth,
+  getReactNativePersistence,
+  initializeAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
 } from "@firebase/auth";
+// importing asyncstorage for persistence
+import AsyncStorage from "@react-native-async-storage/async-storage";
+// importing firebase configuration
 import { firebaseConfig } from "../config/firebaseConfig";
 
-// Initialize Firebase app
+// initialize Firebase app
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+// initialize Firebase auth for persistence where the users auth state maintain between sessions
+const auth = initializeAuth(app, {
+  persistence: getReactNativePersistence(AsyncStorage),
+});
 
+// creating context to manage and share auth thought the app
 const AuthContext = createContext();
 
+// component that contains functions that will handle authenticantion
 export const AuthProvider = ({ children }) => {
+  // I used the hook useState to manage the current user state
   const [user, setUser] = useState(null);
 
+  // used useEffect to update the state of the user when the auth state changes
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
@@ -57,6 +70,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // return the AuthContext provider with the current user and auth functions and wrap the content with it
   return (
     <AuthContext.Provider
       value={{ user, handleLogin, handleSignUp, handleLogout }}
